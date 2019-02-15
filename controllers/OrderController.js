@@ -31,7 +31,7 @@ orderController.getOrderDetail = function (req,res) {
 	var order_id = req.body.order_id
 	var user_id = req.body.user_id
 	var inqding = 0
-	var order_path =  '/img_tmp/order_' + order_id + '.png';
+
 	Order.findOne({
 		"$or":[
 			{
@@ -50,6 +50,10 @@ orderController.getOrderDetail = function (req,res) {
 		}
 	}).populate("truck").then(order=>{
 		if(order){
+			console.log(order)
+
+			var order_path =  '/img_tmp/order_' + order_id + '.png';
+			console.log(order_path)
 			res.send({order:order,image:order_path})
 		}
 		else{//在needs里找
@@ -57,16 +61,23 @@ orderController.getOrderDetail = function (req,res) {
 				_id:order_id,
 				closed:false
 			}).populate("truck").then(need=>{
-				//判断当前用户是否参加抢单
-				Driver.findOne({
-					user: user_id,
-				}).then(driver=>{
-						console.log(need.drivers_applied)
+				if(need){
+					//判断当前用户是否参加抢单
+					Driver.findOne({
+						user: user_id,
+					}).then(driver=>{
+						//console.log(need.drivers_applied)
 						if(need.drivers_applied){
-                            inqding = need.drivers_applied.indexOf(driver._id) + 1
+							inqding = need.drivers_applied.indexOf(driver._id) + 1
 						}
 						res.send({order:need,inqding:inqding})
-				})
+					})
+				}
+				else
+				{
+					res.send({order:null})
+				}
+
 
 			})
 		}

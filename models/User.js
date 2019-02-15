@@ -17,7 +17,8 @@ var UserSchema = new Schema({
     city: String,
     province: String,
     country: String,
-    
+    truck_length:String,
+	truck_type:String,
     id_img_1: String,
     id_img_2: String,
     driver_licence_1: String,

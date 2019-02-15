@@ -227,6 +227,8 @@ userController.updateInfo = function (req, res) {
     var name = req.body.name
     var phone = req.body.phone
     var id = req.body.id
+	var truck_length = req.body.truck_length
+	var truck_type = req.body.truck_type
     
     if(name.length>0 && phone.length>0 && id.length>0) {
         User.findByIdAndUpdate(user_id,
@@ -234,6 +236,8 @@ userController.updateInfo = function (req, res) {
                 name: name,
                 phone: phone,
                 id: id,
+	            truck_length:truck_length,
+	            truck_type:truck_type,
                 apply_at: new Date().getTime()/1000
             },
             {new: true},

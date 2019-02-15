@@ -51,6 +51,10 @@ var NeedSchema = new Schema({
         }
     },
     time: Number,
+	arrive_time: Number,//到货时间
+	peizai:String,//配载，整车
+	chaoxian:String,//超限
+	youka:Number,//油卡金额
     cargo: String,
     price_type: String,
     mass: Number,

@@ -36,7 +36,7 @@ var config = {
 	},
     
     need: {
-        schedule_time: 2*60,
+        schedule_time: 1*60,
 		//推送距离
 	    sendtemp_distance:500000,
         // max_distance: 10000000,
